@@ -1,0 +1,26 @@
+{
+
+  "manifest_version": 2,
+  "name": "Shorten me",
+  "version": "1.0",
+
+  "description": "Adds a url shortener button",
+
+  "icons": {
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png",
+    "186": "icons/icon-186.png"
+  },
+
+  "permissions": [
+    "activeTab",
+    "<all_urls>",
+    "clipboardWrite"
+  ],
+
+  "browser_action": {
+    "default_icon": "icons/icon-48.png",
+    "default_title": "URL Shortener",
+    "default_popup": "popup/shortener.html"
+  }
+}

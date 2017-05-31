@@ -28,9 +28,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.12374369"
-     inkscape:cx="-632.6619"
-     inkscape:cy="271.96641"
+     inkscape:zoom="0.175"
+     inkscape:cx="999.12528"
+     inkscape:cy="685.60015"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -40,7 +40,7 @@
      fit-margin-right="10"
      inkscape:window-width="1038"
      inkscape:window-height="714"
-     inkscape:window-x="2386"
+     inkscape:window-x="882"
      inkscape:window-y="216"
      inkscape:window-maximized="0" />
   <metadata
@@ -51,7 +51,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -62,14 +62,14 @@
      transform="translate(-28.088921,170.43399)">
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:541.22619629px;line-height:381.02328491px;font-family:'Alegreya Sans';-inkscape-font-specification:'Alegreya Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#c57118;fill-opacity:0.81862748;stroke:none;stroke-width:0.26458296px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
-       x="68.315422"
-       y="90.883415"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:378.52120972px;line-height:266.47897339px;font-family:'Alegreya Sans';-inkscape-font-specification:'Alegreya Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#c57118;fill-opacity:0.81862745;stroke:none;stroke-width:0.26458296px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="51.044212"
+       y="83.419235"
        id="text4487"><tspan
          sodipodi:role="line"
          id="tspan4485"
-         x="68.315422"
-         y="90.883415"
-         style="stroke-width:0.26458296px;fill:#c57118;fill-opacity:0.81862748;">s</tspan></text>
+         x="51.044212"
+         y="83.419235"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Airstream;-inkscape-font-specification:Airstream;fill:#c57118;fill-opacity:0.81862745;stroke-width:0.26458296px">S</tspan></text>
   </g>
 </svg>

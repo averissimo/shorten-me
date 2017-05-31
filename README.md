@@ -14,3 +14,7 @@ If the extension is successfull I guess an alternative method must be used.
 
 - maybe by authenticating with OAUTH2.0 with google
 - maube by using other well known service
+
+## Icon
+
+Simple 'S' made with [Airstream](https://www.fontsquirrel.com/fonts/Airstream) font.

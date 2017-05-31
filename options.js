@@ -1,3 +1,10 @@
+/**
+ * Inspired on mozilla's webExtensions examples
+ */
+
+/**
+ * Saving options
+ */
 function saveOptions(e) {
   browser.storage.sync.set({
     key: document.querySelector("#key").value
@@ -5,6 +12,9 @@ function saveOptions(e) {
   e.preventDefault();
 }
 
+/**
+ * Restore options key from storage
+ */
 function restoreOptions() {
   var gettingItem = browser.storage.sync.get('key');
   gettingItem.then((res) => {

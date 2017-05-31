@@ -1,7 +1,6 @@
-/*
-Called when the item has been created, or when creation failed due to an error.
-We'll just log success/failure here.
-*/
+/**
+ * Called when the item has been created, or when creation failed due to an error.
+ */
 function onCreated(n) {
   if (browser.runtime.lastError) {
     console.log(`Error: ${browser.runtime.lastError}`);
@@ -10,6 +9,9 @@ function onCreated(n) {
   }
 }
 
+/**
+ * Create context menu to shorten link
+ */
 browser.contextMenus.create({
   id: "shorten-url",
   //title: browser.i18n.getMessage("shortenURL"),
@@ -17,7 +19,9 @@ browser.contextMenus.create({
   contexts: ["link"]
 }, onCreated);
 
-
+/**
+ * Action when context menu is clicked
+ */
 browser.contextMenus.onClicked.addListener(function(info, tab) {
   switch (info.menuItemId) {
     case "shorten-url":
@@ -26,6 +30,9 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
   }
 })
 
+/**
+ * Action when button is pressed
+ */
 function shortenFromBrowserAction() {
   function updateTab(tabs) {
     if (tabs[0]) {
@@ -39,4 +46,7 @@ function shortenFromBrowserAction() {
   gettingActiveTab.then(updateTab)
 }
 
+/**
+ * Adds listener to check when button is pressed
+ */
 browser.browserAction.onClicked.addListener(shortenFromBrowserAction);

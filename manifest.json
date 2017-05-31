@@ -3,6 +3,15 @@
   "manifest_version": 2,
   "name": "Shorten me",
   "version": "1.0",
+  "author": "André Veríssimo",
+  "default_locale": "en",
+
+  "applications": {
+    "gecko": {
+      "id": "shorten.me@mozilla.org",
+      "strict_min_version": "55.0a1"
+    }
+  },
 
   "description": "Adds a url shortener button",
 
@@ -15,12 +24,31 @@
   "permissions": [
     "activeTab",
     "<all_urls>",
-    "clipboardWrite"
+    "clipboardWrite",
+    "contextMenus",
+    "notifications",
+    "storage"
   ],
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content_script.js"]
+    }
+  ],
+
+  "options_ui": {
+      "page": "options.html",
+      "browser_style": true
+  },
 
   "browser_action": {
     "default_icon": "icons/icon-48.png",
     "default_title": "URL Shortener",
     "default_popup": "popup/shortener.html"
+  },
+
+  "background": {
+    "scripts": ["core.js", "background.js"]
   }
 }

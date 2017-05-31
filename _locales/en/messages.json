@@ -1,0 +1,36 @@
+{
+  "shortenURL": {
+    "message": "Shorten this link",
+    "description": "Title of context menu item to shorten links."
+  },
+
+  "notificationTitle": {
+    "message": "Notification title",
+    "description": "Title of context menu item to shorten links."
+  },
+
+  "notificationError": {
+    "message": "Something bad happened with $URL$",
+    "description": "Tells the user which link they clicked.",
+    "placeholders": {
+      "url" : {
+        "content" : "$1",
+        "example" : "https://developer.mozilla.org"
+      }
+    }
+  },
+  "notificationContent": {
+    "message": "$SHORTURL$ was copied to clipboard from original $URL$.",
+    "description": "Tells the user which link they clicked.",
+    "placeholders": {
+      "url" : {
+        "content" : "$1",
+        "example" : "https://developer.mozilla.org"
+      },
+      "shorturl" : {
+        "content" : "$2",
+        "example" : "https://developer.mozilla.org"
+      }
+    }
+  }
+}

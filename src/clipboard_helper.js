@@ -11,7 +11,7 @@ function copyToClipboard(text) {
         event.clipboardData.setData("text/plain", text);
     }
     document.addEventListener("copy", oncopy, true);
-
+    console.log('caca');
     // Requires the clipboardWrite permission, or a user gesture:
     document.execCommand("copy");
 }

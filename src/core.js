@@ -15,27 +15,32 @@ function isSupportedProtocol(urlString) {
  * @param  {string} link url that should be shortened
  */
 function shortenLink(link) {
-  function copyToClipboard(evt) {
+  function executeCopyScript(evt) {
     var response = JSON.parse(evt.target.response);
 
     const code = "copyToClipboard(" +
                 JSON.stringify(response.id) + ");";
 
+    console.log('code', code);
+
     browser.tabs.executeScript({
       code: "typeof copyToClipboard === 'function';",
     }).then(function(results) {
-        // The content script's last expression will be true if the function
-        // has been defined. If this is not the case, then we need to run
-        // clipboard-helper.js to define function copyToClipboard.
-        if (!results || results[0] !== true) {
-            return browser.tabs.executeScript({
-                file: "clipboard_helper.js",
-            });
-        }
-    }).then(function() {
+      console.log('has function named copyToClipboard', results);
+      // The content script's last expression will be true if the function
+      // has been defined. If this is not the case, then we need to run
+      // clipboard-helper.js to define function copyToClipboard.
+      if (!results || results[0] !== true) {
         return browser.tabs.executeScript({
-            code,
+          file: "/src/clipboard_helper.js",
         });
+      }
+    }).then(function(results2) {
+      console.log('results2', results2);
+      console.log('code2', code);
+      return browser.tabs.executeScript({
+        code,
+      });
     }).catch(function(error) {
         // This could happen if the extension is not allowed to run code in
         // the page, for example if the tab is a privileged page.
@@ -54,7 +59,7 @@ function shortenLink(link) {
       var longUrl = encodeURIComponent(link)
       // POST request
       var xhr = new XMLHttpRequest();
-      xhr.addEventListener("load", copyToClipboard);
+      xhr.addEventListener("load", executeCopyScript);
       xhr.addEventListener("error", notSupportedFromContext);
       xhr.open("POST", basename + urlfrag, true);
       // Send the proper header information along with the request
@@ -63,7 +68,7 @@ function shortenLink(link) {
       console.log('request', xhr)
     });
   } else {
-    onError(link);
+    notSupportedFromContext(link);
   }
 }
 
@@ -98,5 +103,5 @@ function notSupportedFromContext(evt) {
     "message": content
   });
   */
-  console.log(error, evt)
+  console.log('error', evt)
 }

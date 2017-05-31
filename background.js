@@ -19,68 +19,26 @@ browser.contextMenus.create({
 
 
 browser.contextMenus.onClicked.addListener(function(info, tab) {
-  function shortenedLinkFromContext(evt) {
-    console.log('event', evt)
-
-    var response = JSON.parse(evt.target.response);
-
-    const code = "copyToClipboard(" +
-                JSON.stringify(response.id) + ");";
-
-    browser.tabs.executeScript({
-      code: "typeof copyToClipboard === 'function';",
-    }).then(function(results) {
-        // The content script's last expression will be true if the function
-        // has been defined. If this is not the case, then we need to run
-        // clipboard-helper.js to define function copyToClipboard.
-        if (!results || results[0] !== true) {
-            return browser.tabs.executeScript(tab.id, {
-                file: "clipboard_helper.js",
-            });
-        }
-    }).then(function() {
-        return browser.tabs.executeScript(tab.id, {
-            code,
-        });
-    }).catch(function(error) {
-        // This could happen if the extension is not allowed to run code in
-        // the page, for example if the tab is a privileged page.
-        console.error("Failed to copy text: " + error);
-    });
-    notify({url: info.linkUrl, shortUrl: response.id});
-  }
-
   switch (info.menuItemId) {
     case "shorten-url":
-      shortenLink(info.linkUrl, shortenedLinkFromContext, notSupportedFromContext)
+      shortenLink(info.linkUrl)
       break;
   }
 })
 
-function notSupportedFromContext(link) {
-  var title = browser.i18n.getMessage("notificationTitle");
-  var content = browser.i18n.getMessage("notificationError", message.url);
-  browser.notifications.create({
-    "type": "basic",
-    "iconUrl": browser.extension.getURL("icons/icon-48.png"),
-    "title": title,
-    "message": content
-  });
+function shortenFromBrowserAction() {
+  console.log('starting')
+  function updateTab(tabs) {
+    if (tabs[0]) {
+      currentTab = tabs[0];
+      console.log('url', currentTab.url)
+      shortenLink(currentTab.url)
+    }
+  }
+
+  // run this
+  var gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
+  gettingActiveTab.then(updateTab)
 }
 
-/*
-Log that we received the message.
-Then display a notification. The notification contains the URL,
-which we read from the message.
-*/
-function notify(message) {
-  console.log("background script received message");
-  var title = browser.i18n.getMessage("notificationTitle");
-  var content = browser.i18n.getMessage("notificationContent", [message.url, message.shortUrl]);
-  browser.notifications.create({
-    "type": "basic",
-    "iconUrl": browser.extension.getURL("icons/icon-48.png"),
-    "title": title,
-    "message": content
-  });
-}
+browser.browserAction.onClicked.addListener(shortenFromBrowserAction);

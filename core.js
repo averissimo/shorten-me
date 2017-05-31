@@ -1,3 +1,8 @@
+/**
+ * Checks if protocol is supported (only http and https)
+ * @param  {string}  urlString link that is going to be validated
+ * @return {Boolean}           [description]
+ */
 function isSupportedProtocol(urlString) {
   var supportedProtocols = ["https:", "http:"];
   var url = document.createElement('a');
@@ -5,6 +10,10 @@ function isSupportedProtocol(urlString) {
   return supportedProtocols.indexOf(url.protocol) != -1;
 }
 
+/**
+ * Shortens the link, copies to clipboard and notifies the firefox window
+ * @param  {string} link url that should be shortened
+ */
 function shortenLink(link) {
   function copyToClipboard(evt) {
     var response = JSON.parse(evt.target.response);
@@ -58,11 +67,10 @@ function shortenLink(link) {
   }
 }
 
-/*
-Log that we received the message.
-Then display a notification. The notification contains the URL,
-which we read from the message.
-*/
+/**
+ * Notifies the user of a successful shortening of the link
+ * @param  {[hash]} message contains the shortened and original urls
+  */
 function notify(message) {
   var title = browser.i18n.getMessage("notificationTitle");
   var content = browser.i18n.getMessage("notificationContent", [message.url, message.shortUrl]);
@@ -74,13 +82,21 @@ function notify(message) {
   });
 }
 
-function notSupportedFromContext(link) {
+/**
+ * TODO: do something
+ * @param  {[type]} link [description]
+ * @return {[type]}      [description]
+ */
+function notSupportedFromContext(evt) {
+  /*
   var title = browser.i18n.getMessage("notificationTitle");
-  var content = browser.i18n.getMessage("notificationError", message.url);
+  var content = browser.i18n.getMessage("notificationError", evt.target);
   browser.notifications.create({
     "type": "basic",
     "iconUrl": browser.extension.getURL("icons/icon-48.png"),
     "title": title,
     "message": content
   });
+  */
+  console.log(error, evt)
 }

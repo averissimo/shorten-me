@@ -27,11 +27,9 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
 })
 
 function shortenFromBrowserAction() {
-  console.log('starting')
   function updateTab(tabs) {
     if (tabs[0]) {
       currentTab = tabs[0];
-      console.log('url', currentTab.url)
       shortenLink(currentTab.url)
     }
   }

@@ -12,12 +12,16 @@ packageFiles = [
   'README'
 ]
 
+manifest = require('./manifest.json')
+
+outFile = "shorten_me-#{manifest.version}.zip"
+
 gulp.task 'clean', ->
-  del(['dist/archive.zip'])
+  del(['dist/' + outFile])
 
 gulp.task 'package', ['clean'], ->
     gulp.src packageFiles, { base: './' }
-      .pipe(zip('archive.zip'))
+      .pipe(zip(outFile))
       .pipe(gulp.dest('dist'))
 
 

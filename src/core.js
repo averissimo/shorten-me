@@ -23,30 +23,38 @@ function shortenLink(link) {
 
     console.log('code', code);
 
-    browser.tabs.executeScript({
-      code: "typeof copyToClipboard === 'function';",
-    }).then(function(results) {
-      console.log('has function named copyToClipboard', results);
-      // The content script's last expression will be true if the function
-      // has been defined. If this is not the case, then we need to run
-      // clipboard-helper.js to define function copyToClipboard.
-      if (!results || results[0] !== true) {
-        return browser.tabs.executeScript({
-          file: "/src/clipboard_helper.js",
+    function copyInTab(tabs) {
+
+      if (tabs[0]) {
+        currentTab = tabs[0];
+
+        browser.tabs.executeScript(currentTab.id, {
+          code: "typeof copyToClipboard === 'function';",
+        }).then(function(results) {
+          console.log('has function named copyToClipboard', results);
+          // The content script's last expression will be true if the function
+          // has been defined. If this is not the case, then we need to run
+          // clipboard-helper.js to define function copyToClipboard.
+          if (!results || results[0] !== true) {
+            return browser.tabs.executeScript(currentTab.id, {
+              file: "/src/clipboard_helper.js",
+            });
+          }
+        }).then(function(results2) {
+          return browser.tabs.executeScript(currentTab.id, {
+            code,
+          });
+        }).catch(function(error) {
+            // This could happen if the extension is not allowed to run code in
+            // the page, for example if the tab is a privileged page.
+            console.error("Failed to copy text: " + error);
         });
+        notify({url: link, shortUrl: response.id});
       }
-    }).then(function(results2) {
-      console.log('results2', results2);
-      console.log('code2', code);
-      return browser.tabs.executeScript({
-        code,
-      });
-    }).catch(function(error) {
-        // This could happen if the extension is not allowed to run code in
-        // the page, for example if the tab is a privileged page.
-        console.error("Failed to copy text: " + error);
-    });
-    notify({url: link, shortUrl: response.id});
+    }
+
+    var gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
+    gettingActiveTab.then(copyInTab)
   }
 
   if (isSupportedProtocol(link)) {

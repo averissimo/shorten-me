@@ -24,6 +24,7 @@
     "activeTab",
     "clipboardWrite",
     "<all_urls>",
+    "host",
     "contextMenus",
     "notifications",
     "storage"

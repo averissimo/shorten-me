@@ -10,8 +10,8 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="626.75177mm"
-   height="250.51941mm"
-   viewBox="0 0 626.75174 250.51941"
+   height="626.75177mm"
+   viewBox="0 0 626.75174 626.75177"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.1 r15371"
@@ -29,7 +29,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.175"
-     inkscape:cx="2777.9975"
+     inkscape:cx="1720.8546"
      inkscape:cy="639.49651"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -59,17 +59,17 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-41.422734,157.85722)">
+     transform="translate(-41.422734,534.08958)">
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:378.52120972px;line-height:266.47897339px;font-family:'Alegreya Sans';-inkscape-font-specification:'Alegreya Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#c57118;fill-opacity:0.81862745;stroke:none;stroke-width:0.26458296px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="51.044212"
-       y="83.419235"
+       x="51.04422"
+       y="-104.69695"
        id="text4487"><tspan
          sodipodi:role="line"
          id="tspan4485"
-         x="51.044212"
-         y="83.419235"
+         x="51.04422"
+         y="-104.69695"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Airstream;-inkscape-font-specification:Airstream;fill:#c57118;fill-opacity:0.81862745;stroke-width:0.26458296px">S.me</tspan></text>
   </g>
 </svg>

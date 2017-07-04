@@ -1,3 +1,7 @@
+const defaultSettings = {
+   key: 'AIzaSyA61YQflGBiR2a-9q_C83kvb8c5kTifxRk'
+}
+
 /**
  * Checks if protocol is supported (only http and https)
  * @param  {string}  urlString link that is going to be validated
@@ -21,7 +25,7 @@ function shortenLink(link) {
     const code = "copyToClipboard(" +
                 JSON.stringify(response.id) + ");";
 
-    console.log('code', code);
+    console.log('Code being run in current tab', code);
 
     function copyInTab(tabs) {
 
@@ -31,7 +35,6 @@ function shortenLink(link) {
         browser.tabs.executeScript(currentTab.id, {
           code: "typeof copyToClipboard === 'function';",
         }).then(function(results) {
-          console.log('has function named copyToClipboard', results);
           // The content script's last expression will be true if the function
           // has been defined. If this is not the case, then we need to run
           // clipboard-helper.js to define function copyToClipboard.
@@ -62,9 +65,14 @@ function shortenLink(link) {
     var key = browser.storage.sync.get('key');
 
     key.then(function(item) {
-      var basename = "https://www.googleapis.com"
-      var urlfrag = "/urlshortener/v1/url?key=" + item.key
-      var longUrl = encodeURIComponent(link)
+      if (item.key === undefined) {
+        item.key = defaultSettings.key
+      }
+      var basename = "https://www.googleapis.com";
+      var urlfrag = "/urlshortener/v1/url?key=" + item.key;
+      var longUrl = encodeURIComponent(link);
+      //
+      console.log('Calling ' + basename + urlfrag + ' with ' + JSON.stringify({"longUrl": link}));
       // POST request
       var xhr = new XMLHttpRequest();
       xhr.addEventListener("load", executeCopyScript);
@@ -73,7 +81,7 @@ function shortenLink(link) {
       // Send the proper header information along with the request
       xhr.setRequestHeader("Content-type", "application/json");
       xhr.send(JSON.stringify({"longUrl": link}));
-      console.log('request', xhr)
+      console.log('request', xhr);
     });
   } else {
     notSupportedFromContext(link);

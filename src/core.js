@@ -27,37 +27,51 @@ function shortenLink(link) {
 
     console.log('Code being run in current tab', code);
 
-    function copyInTab(tabs) {
-
-      if (tabs[0]) {
-        currentTab = tabs[0];
-
-        browser.tabs.executeScript(currentTab.id, {
-          code: "typeof copyToClipboard === 'function';",
-        }).then(function(results) {
-          // The content script's last expression will be true if the function
-          // has been defined. If this is not the case, then we need to run
-          // clipboard-helper.js to define function copyToClipboard.
-          if (!results || results[0] !== true) {
-            return browser.tabs.executeScript(currentTab.id, {
-              file: "/src/clipboard_helper.js",
-            });
-          }
-        }).then(function(results2) {
-          return browser.tabs.executeScript(currentTab.id, {
-            code,
+    function copyInTab(tabId, noRecur=false) {
+      browser.tabs.executeScript({
+        code: "typeof copyToClipboard === 'function';",
+        runAt: 'document_start',
+        matchAboutBlank: true
+      }).then(function(results) {
+        // The content script's last expression will be true if the function
+        // has been defined. If this is not the case, then we need to run
+        // clipboard-helper.js to define function copyToClipboard.
+        if (!results || results[0] !== true) {
+          return browser.tabs.executeScript(tabId, {
+            file: "/src/clipboard_helper.js",
+            runAt: 'document_start',
+            matchAboutBlank: true
           });
-        }).catch(function(error) {
-            // This could happen if the extension is not allowed to run code in
-            // the page, for example if the tab is a privileged page.
-            console.error("Failed to copy text: " + error);
+        }
+      }).then(function(results2) {
+        var retVal = browser.tabs.executeScript(tabId, {
+          code: code,
+          runAt: 'document_start',
+          matchAboutBlank: true
         });
-        notify({url: link, shortUrl: response.id});
-      }
+        notifySuccess({url: link, shortUrl: response.id});
+        return retVal
+      }, function(error){
+        if(noRecur) {
+          console.log('Going to try tab.id 1')
+          copyInTab(1, false);
+        } else {
+          notifyError({info: error, url: link, shortUrl: response.id});
+        }
+      }).then(function() {
+        // console.log('success!!')
+      });
     }
-
     var gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
-    gettingActiveTab.then(copyInTab)
+    gettingActiveTab.then(function(tabs) {
+      console.log('tabs', tabs)
+      console.log('tabs[0]', tabs[0])
+      if(tabs[0]) {
+        copyInTab(tabs[0].id, true)
+      } else {
+        console.error("Failed to copy text: no active tab");
+      }
+    })
   }
 
   if (isSupportedProtocol(link)) {
@@ -76,7 +90,7 @@ function shortenLink(link) {
       // POST request
       var xhr = new XMLHttpRequest();
       xhr.addEventListener("load", executeCopyScript);
-      xhr.addEventListener("error", notSupportedFromContext);
+      xhr.addEventListener("error", notifyNetworkError);
       xhr.open("POST", basename + urlfrag, true);
       // Send the proper header information along with the request
       xhr.setRequestHeader("Content-type", "application/json");
@@ -84,17 +98,21 @@ function shortenLink(link) {
       console.log('request', xhr);
     });
   } else {
-    notSupportedFromContext(link);
+    // Do nothing TODO: disable icon on these tabs
+    notifyNetworkProtocol(link);
   }
 }
 
 /**
- * Notifies the user of a successful shortening of the link
- * @param  {[hash]} message contains the shortened and original urls
-  */
-function notify(message) {
+ * Notify error message
+ * @param  {[type]} messageType [description]
+ * @param  {[type]} messageArray [description]
+ * @return {[type]}         [description]
+ */
+function notify(messageType = "notificationErrorGeneric", messageArray = []) {
   var title = browser.i18n.getMessage("notificationTitle");
-  var content = browser.i18n.getMessage("notificationContent", [message.url, message.shortUrl]);
+  var content = browser.i18n.getMessage(messageType, messageArray);
+  console.log('Error: ' + content)
   browser.notifications.create({
     "type": "basic",
     "iconUrl": browser.extension.getURL("icons/icon-48.png"),
@@ -104,20 +122,67 @@ function notify(message) {
 }
 
 /**
- * TODO: do something
- * @param  {[type]} link [description]
- * @return {[type]}      [description]
+ * [notifySuccess description]
+ * @param  {[type]} message [description]
+ * @return {[type]}         [description]
  */
-function notSupportedFromContext(evt) {
-  /*
-  var title = browser.i18n.getMessage("notificationTitle");
-  var content = browser.i18n.getMessage("notificationError", evt.target);
-  browser.notifications.create({
-    "type": "basic",
-    "iconUrl": browser.extension.getURL("icons/icon-48.png"),
-    "title": title,
-    "message": content
-  });
-  */
-  console.log('error', evt)
+function notifySuccess(message) {
+  notify("notificationContent", [message.url, message.shortUrl]);
 }
+
+/**
+ * Notify clipboard copy error message
+ * @param  {[type]} message [description]
+ * @return {[type]}         [description]
+ */
+function notifyClipboardError(message) {
+  notify("notificationErrorClipboard", [message.info, message.url, message.shortUrl]);
+}
+
+/**
+ * Notify network error message
+ * @param  {[type]} message [description]
+ * @return {[type]}         [description]
+ */
+function notifyNetworkError() {
+  notify("notificationErrorNetwork", []);
+}
+
+/**
+ * Notify protocol error message
+ * @param  {[type]} message [description]
+ * @return {[type]}         [description]
+ */
+function notifyNetworkProtocol(url) {
+  notify("notificationErrorProtocol", [url]);
+}
+
+function checkTabIsSupported(tabId, changeInfo, tab) {
+  enableBrowserAction(tabId, tab.url)
+}
+
+function enableBrowserAction(tabId, tabUrl) {
+  if (isSupportedProtocol(tabUrl)) {
+    browser.browserAction.enable(tabId)
+  } else (
+    browser.browserAction.disable(tabId)
+  )
+}
+
+function checkActivatedTab(activeInfo) {
+  var gettingInfo = browser.tabs.get(activeInfo.tabId)
+  gettingInfo.then(function(tabInfo){
+    enableBrowserAction(tabInfo.id, tabInfo.url);
+  });
+}
+
+browser.tabs.onUpdated.addListener(checkTabIsSupported)
+browser.tabs.onActivated.addListener(checkActivatedTab)
+
+var currentTab = browser.tabs.query({active: true});
+
+currentTab.then(function(tabInfoArray){
+  tabInfoArray.forEach(function(tabInfo){
+    enableBrowserAction(tabInfo.id, tabInfo.url);
+  })  
+});

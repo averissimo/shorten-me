@@ -24,6 +24,8 @@
     "activeTab",
     "clipboardWrite",
     "<all_urls>",
+    "tabs",
+    "*://addons.mozilla.org/*",
     "contextMenus",
     "notifications",
     "storage"

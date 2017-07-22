@@ -5,20 +5,10 @@
   },
 
   "notificationTitle": {
-    "message": "Notification title",
+    "message": "Shorten-me",
     "description": "Title of context menu item to shorten links."
   },
 
-  "notificationError": {
-    "message": "Something bad happened with $URL$",
-    "description": "Tells the user which link they clicked.",
-    "placeholders": {
-      "url" : {
-        "content" : "$1",
-        "example" : "https://developer.mozilla.org"
-      }
-    }
-  },
   "notificationContent": {
     "message": "$SHORTURL$ was copied to clipboard from original $URL$.",
     "description": "Tells the user which link they clicked.",
@@ -29,6 +19,46 @@
       },
       "shorturl" : {
         "content" : "$2",
+        "example" : "https://developer.mozilla.org"
+      }
+    }
+  },
+
+  "notificationErrorGeneric": {
+    "message": "Oops, something went wrong. Sorry!",
+    "description": "Generic error message."
+  },
+
+  "notificationErrorNetwork": {
+    "message": "Network problems when calling goo.gl service, please check your connection.",
+    "description": "Network error calling goo.gl service."
+  },
+
+  "notificationErrorProtocol": {
+    "message": "Current tab's url is not supported. (only http and https).\n$URL$",
+    "description": "Protocol not supported, only http/https.",
+    "placeholders": {
+      "url" : {
+        "content" : "$1",
+        "example" : "https://developer.mozilla.org"
+      }
+    }
+  },
+
+  "notificationErrorClipboard": {
+    "message": "Problem when copying '$SHORTURL$' to clipboard\nThis is why: $MSG$",
+    "description": "Clipboard copy/write fail.",
+    "placeholders": {
+      "msg" : {
+        "content" : "$1",
+        "example" : "https://developer.mozilla.org"
+      },
+      "url" : {
+        "content" : "$2",
+        "example" : "https://developer.mozilla.org"
+      },
+      "shorturl" : {
+        "content" : "$3",
         "example" : "https://developer.mozilla.org"
       }
     }

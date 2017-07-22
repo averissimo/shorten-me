@@ -1,6 +1,6 @@
 # Shorten me
 
-My previous extension ([shortly](https://github.com/aloshbennett/shortly)) is
+The extension I was previously using ([shortly](https://github.com/aloshbennett/shortly)) is
 not webExtensions friendly so I created this very simple one that pretty much
 does the same thing
 

@@ -1,8 +1,8 @@
 {
 
   "manifest_version": 2,
-  "name": "Shorten me",
-  "version": "1.0.7",
+  "name": "Shorten me - URL Shortener",
+  "version": "1.0.8",
   "author": "André Veríssimo",
   "default_locale": "en",
 
@@ -13,7 +13,7 @@
     }
   },
 
-  "description": "Adds a url shortener button and context menu for links in a page",
+  "description": "Shorten me - URL Shortener",
 
   "icons": {
     "48": "icons/icon-48.png",

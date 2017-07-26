@@ -64,8 +64,6 @@ function shortenLink(link) {
     }
     var gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
     gettingActiveTab.then(function(tabs) {
-      console.log('tabs', tabs)
-      console.log('tabs[0]', tabs[0])
       if(tabs[0]) {
         copyInTab(tabs[0].id, true)
       } else {
@@ -184,5 +182,5 @@ var currentTab = browser.tabs.query({active: true});
 currentTab.then(function(tabInfoArray){
   tabInfoArray.forEach(function(tabInfo){
     enableBrowserAction(tabInfo.id, tabInfo.url);
-  })  
+  })
 });

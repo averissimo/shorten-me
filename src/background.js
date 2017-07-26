@@ -46,6 +46,41 @@ function shortenFromBrowserAction() {
   gettingActiveTab.then(updateTab)
 }
 
+function checkTabIsSupported(tabId, changeInfo, tab) {
+  enableBrowserAction(tabId, tab.url)
+}
+
+function enableBrowserAction(tabId, tabUrl) {
+  if (isSupportedProtocol(tabUrl)) {
+    browser.browserAction.enable(tabId)
+  } else (
+    browser.browserAction.disable(tabId)
+  )
+}
+
+function checkActivatedTab(activeInfo) {
+  var gettingInfo = browser.tabs.get(activeInfo.tabId)
+  gettingInfo.then(function(tabInfo){
+    enableBrowserAction(tabInfo.id, tabInfo.url);
+  });
+}
+
+/**
+ * 
+ */
+
+browser.tabs.onUpdated.addListener(checkTabIsSupported)
+browser.tabs.onActivated.addListener(checkActivatedTab)
+
+var currentTab = browser.tabs.query({active: true});
+
+currentTab.then(function(tabInfoArray){
+  tabInfoArray.forEach(function(tabInfo){
+    enableBrowserAction(tabInfo.id, tabInfo.url);
+  })
+});
+
+
 /**
  * Adds listener to check when button is pressed
  */

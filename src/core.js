@@ -56,7 +56,7 @@ function shortenLink(link) {
           console.log('Going to try tab.id 1')
           copyInTab(1, false);
         } else {
-          notifyError({info: error, url: link, shortUrl: response.id});
+          notifyClipboardError({info: error, url: link, shortUrl: response.id});
         }
       }).then(function() {
         // console.log('success!!')
@@ -154,33 +154,3 @@ function notifyNetworkError() {
 function notifyNetworkProtocol(url) {
   notify("notificationErrorProtocol", [url]);
 }
-
-function checkTabIsSupported(tabId, changeInfo, tab) {
-  enableBrowserAction(tabId, tab.url)
-}
-
-function enableBrowserAction(tabId, tabUrl) {
-  if (isSupportedProtocol(tabUrl)) {
-    browser.browserAction.enable(tabId)
-  } else (
-    browser.browserAction.disable(tabId)
-  )
-}
-
-function checkActivatedTab(activeInfo) {
-  var gettingInfo = browser.tabs.get(activeInfo.tabId)
-  gettingInfo.then(function(tabInfo){
-    enableBrowserAction(tabInfo.id, tabInfo.url);
-  });
-}
-
-browser.tabs.onUpdated.addListener(checkTabIsSupported)
-browser.tabs.onActivated.addListener(checkActivatedTab)
-
-var currentTab = browser.tabs.query({active: true});
-
-currentTab.then(function(tabInfoArray){
-  tabInfoArray.forEach(function(tabInfo){
-    enableBrowserAction(tabInfo.id, tabInfo.url);
-  })
-});

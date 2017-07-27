@@ -46,7 +46,7 @@
   },
 
   "notificationErrorClipboard": {
-    "message": "Problem when copying '$SHORTURL$' to clipboard\nThis is why: $MSG$",
+    "message": "Problem when copying '$SHORTURL$' to clipboard\nThis is what the monkeys know: $MSG$",
     "description": "Clipboard copy/write fail.",
     "placeholders": {
       "msg" : {

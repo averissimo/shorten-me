@@ -16,9 +16,9 @@
    id="svg8"
    inkscape:version="0.92.1 r15371"
    sodipodi:docname="Logo.svg"
-   inkscape:export-filename="/home/averissimo/work/apps/bitly/icons/logo.png"
-   inkscape:export-xdpi="1.17"
-   inkscape:export-ydpi="1.17">
+   inkscape:export-filename="logo.png"
+   inkscape:export-xdpi="2.5899999"
+   inkscape:export-ydpi="2.5899999">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -29,8 +29,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.175"
-     inkscape:cx="1720.8546"
-     inkscape:cy="639.49651"
+     inkscape:cx="720.8546"
+     inkscape:cy="-731.93206"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -51,7 +51,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -60,9 +60,14 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-41.422734,534.08958)">
+    <path
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:378.52120972px;line-height:266.47897339px;font-family:'Alegreya Sans';-inkscape-font-specification:'Alegreya Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.26458296px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 237.07422,-337.96289 c -25.78143,2.83418 -49.82732,13.93329 -72.34766,26.25195 -16.32822,10.35073 -33.20629,21.9261 -43.16601,38.95117 -11.76015,20.63855 -9.69676,49.40723 8.12068,66.04006 14.89434,16.69393 31.09594,32.71492 45.27775,49.72948 -1.38619,8.02879 -9.6943,13.46564 -17.67968,11.68359 -31.73308,0 -63.466149,0 -95.199222,0 -4.468228,13.82504 -8.936963,27.64991 -13.40625,41.47461 39.611108,-0.16762 79.241832,0.32304 118.841792,-0.22266 30.19078,-1.90504 53.5776,-33.60634 48.26563,-62.94922 -1.47313,-8.71976 -6.66674,-16.00501 -13.13703,-21.81677 -15.24341,-16.51454 -30.76402,-32.85409 -45.24774,-50.0133 -4.51291,-8.91729 3.26475,-18.22157 9.625,-23.88477 17.78123,-16.2074 40.82255,-24.4702 63.22266,-32.00781 2.91933,-0.38893 7.88811,-2.56728 9.6582,-1.25196 -3.96223,14.78611 -15.85658,25.31621 -23.84491,37.91436 -6.30365,9.0458 -12.60168,18.09703 -19.05352,27.03877 11.31136,7.95689 22.62116,15.91601 33.92968,23.87695 13.27924,-19.32328 28.02682,-37.68376 40.46289,-57.55859 9.07866,-15.66025 14.88695,-35.75814 6.83399,-53.00586 -7.23133,-15.58104 -25.06327,-21.41476 -41.15625,-20.25 z m 369.41992,102.9707 c -24.82525,0.82144 -47.18067,16.3412 -61.76155,35.6846 -11.25404,16.00114 -19.09789,34.8331 -20.98064,54.37986 -8.69622,-0.29533 -18.91011,0.58657 -26.67187,-0.4336 4.4705,-15.24234 11.46433,-30.111 11.40957,-46.33585 0.45928,-14.34614 -6.3644,-30.40264 -20.80591,-35.39377 -15.23,-6.05532 -32.1482,-0.66074 -45.13882,8.13197 -3.2995,2.07962 -6.49557,4.3229 -9.57422,6.71679 -6.03542,-12.45299 -20.65669,-18.86578 -34.01562,-16.71679 -6.47874,0.17782 -12.65655,2.84739 -18.66992,5.09179 5.85216,-8.41402 -3.71587,-6.02712 -9.58985,-6.22851 -10.73437,0 -21.46875,0 -32.20312,0 -13.54924,42.21448 -27.10098,84.42815 -40.65039,126.64258 14.39518,-1e-5 28.79036,0 43.18554,0 6.41811,-19.42705 11.0542,-40.62237 25.53248,-55.94744 8.49754,-9.494 17.1519,-19.39822 28.37377,-25.74592 -3.80953,14.63398 -9.76516,28.78123 -13.87695,43.38671 -5.24035,12.39113 -8.28845,25.5427 -12.4375,38.30665 14.66341,0 29.32682,0 43.99024,0 4.8775,-18.13195 10.36517,-36.78016 22.24811,-51.52046 9.0396,-11.59972 19.15504,-23.05916 31.98626,-30.52056 -5.15688,15.03791 -10.9102,30.19873 -14.07008,45.84363 -2.19992,17.2177 11.29169,34.79812 28.84547,35.96496 10.52551,0.60375 21.09469,0.0357 31.63477,0.23243 3.58856,-11.10437 7.17849,-22.2083 10.76757,-33.3125 1.33349,15.50486 13.1252,29.79583 28.8125,32.23242 15.94597,2.5364 32.25576,0.35742 48.33204,1.08008 15.31966,-1e-5 30.63932,0 45.95898,0 4.60739,-13.8251 9.21384,-27.65051 13.82422,-41.47461 -16.29557,0 -32.59115,0 -48.88672,0 17.5202,-13.10243 35.43425,-30.51541 37.46484,-53.5293 1.20591,-13.07964 -6.84075,-25.59961 -18.60742,-31.01953 -7.46185,-3.98402 -15.99514,-5.76026 -24.42578,-5.51563 z m -2.19922,41.5 c -8.31749,10.52071 -19.28613,18.5451 -30.64258,25.5 6.63727,-11.78999 16.83858,-23.56264 30.89844,-25.84179 z m -330.94726,41.01953 c -14.08748,0.12931 -25.57693,14.24309 -22.91016,28.08008 1.38106,14.12965 16.6892,24.03036 30.21094,20.24414 15.56803,-3.31605 23.86068,-23.43489 15.02148,-36.71289 -4.79882,-7.50832 -13.33463,-12.23994 -22.32226,-11.61133 z"
+       id="text835"
+       inkscape:connector-curvature="0" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:378.52120972px;line-height:266.47897339px;font-family:'Alegreya Sans';-inkscape-font-specification:'Alegreya Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#c57118;fill-opacity:0.81862745;stroke:none;stroke-width:0.26458296px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:378.52120972px;line-height:266.47897339px;font-family:'Alegreya Sans';-inkscape-font-specification:'Alegreya Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#c57118;fill-opacity:1;stroke:none;stroke-width:0.26458296px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
        x="51.04422"
        y="-104.69695"
        id="text4487"><tspan
@@ -70,6 +75,6 @@
          id="tspan4485"
          x="51.04422"
          y="-104.69695"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Airstream;-inkscape-font-specification:Airstream;fill:#c57118;fill-opacity:0.81862745;stroke-width:0.26458296px">S.me</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Airstream;-inkscape-font-specification:Airstream;fill:#c57118;fill-opacity:1;stroke-width:0.26458296px;">S.me</tspan></text>
   </g>
 </svg>

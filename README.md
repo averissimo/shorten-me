@@ -1,5 +1,7 @@
 # Shorten me
 
+Available at [Firefox addons](https://addons.mozilla.org/en-US/firefox/addon/shorten_me/)
+
 The extension I was previously using ([shortly](https://github.com/aloshbennett/shortly)) is
 not webExtensions friendly so I created this very simple one that pretty much
 does the same thing

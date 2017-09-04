@@ -5,12 +5,12 @@
   },
 
   "notificationTitle": {
-    "message": "Shorten-me",
+    "message": "Shorten me",
     "description": "Title of context menu item to shorten links."
   },
 
   "notificationContent": {
-    "message": "$SHORTURL$ was copied to clipboard from original $URL$.",
+    "message": "$SHORTURL$ was copied to clipboard.",
     "description": "Tells the user which link they clicked.",
     "placeholders": {
       "url" : {
@@ -45,8 +45,27 @@
     }
   },
 
+  "notificationErrorHost": {
+    "message": "Sorry, this page is restricted by browser and cannot copy to clipboard. However here is the link: $SHORTURL$",
+    "description": "Clipboard copy/write fail.",
+    "placeholders": {
+      "msg" : {
+        "content" : "$1",
+        "example" : "https://developer.mozilla.org"
+      },
+      "url" : {
+        "content" : "$2",
+        "example" : "https://developer.mozilla.org"
+      },
+      "shorturl" : {
+        "content" : "$3",
+        "example" : "https://developer.mozilla.org"
+      }
+    }
+  },
+
   "notificationErrorClipboard": {
-    "message": "Problem when copying '$SHORTURL$' to clipboard\nThis is what the monkeys know: $MSG$",
+    "message": "Sorry, $MSG$\nHowever the shorten link is '$SHORTURL$'",
     "description": "Clipboard copy/write fail.",
     "placeholders": {
       "msg" : {

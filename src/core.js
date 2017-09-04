@@ -25,7 +25,7 @@ function shortenLink(link) {
     const code = "copyToClipboard(" +
                 JSON.stringify(response.id) + ");";
 
-    console.log('Code being run in current tab', code);
+    // console.log('Code being run in current tab', code);
 
     function copyInTab(tabId, noRecur=false) {
       browser.tabs.executeScript({
@@ -53,10 +53,14 @@ function shortenLink(link) {
         return retVal
       }, function(error){
         if(noRecur) {
-          console.log('Going to try tab.id 1')
+          // console.log('Going to try tab.id 1')
           copyInTab(1, false);
         } else {
-          notifyClipboardError({info: error, url: link, shortUrl: response.id});
+          if (error.message && /Missing host permission for the tab/.test(error.message)) {
+            notifyHostError({info: error, url: link, shortUrl: response.id});
+          } else {
+            notifyClipboardError({info: error, url: link, shortUrl: response.id});
+          }
         }
       }).then(function() {
         // console.log('success!!')
@@ -67,7 +71,7 @@ function shortenLink(link) {
       if(tabs[0]) {
         copyInTab(tabs[0].id, true)
       } else {
-        console.error("Failed to copy text: no active tab");
+        // console.error("Failed to copy text: no active tab");
       }
     })
   }
@@ -84,7 +88,7 @@ function shortenLink(link) {
       var urlfrag = "/urlshortener/v1/url?key=" + item.key;
       var longUrl = encodeURIComponent(link);
       //
-      console.log('Calling ' + basename + urlfrag + ' with ' + JSON.stringify({"longUrl": link}));
+      // console.log('Calling ' + basename + urlfrag + ' with ' + JSON.stringify({"longUrl": link}));
       // POST request
       var xhr = new XMLHttpRequest();
       xhr.addEventListener("load", executeCopyScript);
@@ -93,7 +97,7 @@ function shortenLink(link) {
       // Send the proper header information along with the request
       xhr.setRequestHeader("Content-type", "application/json");
       xhr.send(JSON.stringify({"longUrl": link}));
-      console.log('request', xhr);
+      // console.log('request', xhr);
     });
   } else {
     // Do nothing TODO: disable icon on these tabs
@@ -110,7 +114,7 @@ function shortenLink(link) {
 function notify(messageType = "notificationErrorGeneric", messageArray = []) {
   var title = browser.i18n.getMessage("notificationTitle");
   var content = browser.i18n.getMessage(messageType, messageArray);
-  console.log('Error: ' + content)
+  // console.log('Error: ' + content)
   browser.notifications.create({
     "type": "basic",
     "iconUrl": browser.extension.getURL("icons/icon-48.png"),
@@ -129,7 +133,16 @@ function notifySuccess(message) {
 }
 
 /**
- * Notify clipboard copy error message
+ * Notify host copy error message
+ * @param  {[type]} message [description]
+ * @return {[type]}         [description]
+ */
+function notifyHostError(message) {
+  notify("notificationErrorHost", [message.info, message.url, message.shortUrl]);
+}
+
+/**
+ * Notify generic clipboard copy error message
  * @param  {[type]} message [description]
  * @return {[type]}         [description]
  */

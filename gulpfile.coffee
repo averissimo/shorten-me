@@ -5,7 +5,7 @@ zip  = require 'gulp-zip'
 packageFiles = [
   'src/**/*',
   '_locales/**/*',
-  'icons/*',
+  'icons/*.png',
   'options/**/*',
   'LICENSE',
   'manifest.json',

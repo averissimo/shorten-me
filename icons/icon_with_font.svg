@@ -14,7 +14,7 @@
    viewBox="0 0 275.29442 275.29443"
    version="1.1"
    id="svg8"
-   inkscape:version="0.92.1 r15371"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
    sodipodi:docname="icon_with_font.svg"
    inkscape:export-filename="icon-48.png"
    inkscape:export-xdpi="4.4299998"
@@ -29,8 +29,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.175"
-     inkscape:cx="27.696709"
-     inkscape:cy="685.60015"
+     inkscape:cx="251.24503"
+     inkscape:cy="-196.32005"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -60,6 +60,12 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-28.088921,170.43399)">
+    <path
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:266.47897339px;font-family:Airstream;-inkscape-font-specification:Airstream;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 243.1944,-166.12441 c -45.56392,4.52795 -88.39362,26.72867 -121.23633,58.15625 -20.21834,21.968088 -27.727595,56.933688 -12.59375,83.681638 10.79307,20.1178409 29.69299,33.8735689 44.19531,51.041018 -31.77318,-0.634404 -63.604825,0.325941 -95.345715,-0.208983 -5.03671,0.299413 -7.47869,5.355979 -7.57322,9.818706 -6.91805,21.39819 -13.83283,42.797441 -20.75296,64.194981 51.83356,-2.521268 104.096745,3.00678 155.782775,-3.107465 37.26656,-10.476381 61.12992,-56.376147 44.88326,-92.3046611 -12.96639,-26.6214259 -8.61611,-0.733375 1.61123,7.2710651 18.95608,-34.150921 57.42578,-70.228441 67.65049,-109.097231 6.21728,-24.038698 -4.15126,-53.537598 -27.98437,-63.626958 -8.91422,-4.16484 -18.82866,-5.96575 -28.63672,-5.81836 z"
+       id="path816"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccccccccc" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:378.52120972px;line-height:266.47897339px;font-family:'Alegreya Sans';-inkscape-font-specification:'Alegreya Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#c57118;fill-opacity:1;stroke:none;stroke-width:0.26458296px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"

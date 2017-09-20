@@ -10,22 +10,51 @@ function onCreated(n) {
 }
 
 /**
- * Create context menu to shorten link
+ * Builds the context menus depending on the options
  */
-browser.contextMenus.create({
-  id: "shorten-url",
-  //title: browser.i18n.getMessage("shortenURL"),
-  title: browser.i18n.getMessage("shortenURL"),
-  contexts: ["link"]
-}, onCreated);
+function buildContext() {
+
+  browser.storage.local.get('prefs').then(ret => {
+    let item = ret['prefs'] || {link_in_context: true, tab_url_in_context: false}
+
+    browser.contextMenus.removeAll()
+    //
+    if (item.link_in_context) {
+      /**
+       * Create context menu to shorten link
+       */
+      browser.contextMenus.create({
+        id: "shorten-url",
+        //title: browser.i18n.getMessage("shortenURL"),
+        title: browser.i18n.getMessage("shortenURL"),
+        contexts: ["link"]
+      }, onCreated);
+    }
+
+    if (item.tab_url_in_context) {
+      /**
+       * Create context menu to shorten link
+       */
+      browser.contextMenus.create({
+        id: "shorten-tab",
+        //title: browser.i18n.getMessage("shortenURL"),
+        title: browser.i18n.getMessage("shortenTab"),
+        contexts: ["audio", "editable", "frame", "image", "page", "password", "selection", "video"]
+      }, onCreated);
+    }
+  })
+}
 
 /**
  * Action when context menu is clicked
  */
-browser.contextMenus.onClicked.addListener(function(info, tab) {
+browser.contextMenus.onClicked.addListener((info, tab) => {
   switch (info.menuItemId) {
     case "shorten-url":
       shortenLink(info.linkUrl)
+      break;
+    case "shorten-tab":
+      shortenLink(tab.url)
       break;
   }
 })
@@ -65,8 +94,28 @@ function checkActivatedTab(activeInfo) {
   });
 }
 
+function receiveMessage(message,sender,sendResponse){
+  //Receives a message that must be an object with a property 'type'.
+  //  This format is imposed because in a larger extension we may
+  //  be using messages for multiple purposes. Having the 'type'
+  //  provides a defined way for other parts of the extension to
+  //  both indicate the purpose of the message and send arbitrary
+  //  data (other properties in the object).
+  // console.log('Received message: ',message);
+  if(typeof message !== 'object' || !message.hasOwnProperty('type')){
+      //Message does not have the format we have imposed for our use.
+      //Message is not one we understand.
+      return;
+  }
+  if(message.type === "optionsUpdated"){
+      //The options have been updated and stored by options.js.
+      //Re-read all options.
+      buildContext();
+  }
+}
+
 /**
- * 
+ *
  */
 
 browser.tabs.onUpdated.addListener(checkTabIsSupported)
@@ -85,3 +134,8 @@ currentTab.then(function(tabInfoArray){
  * Adds listener to check when button is pressed
  */
 browser.browserAction.onClicked.addListener(shortenFromBrowserAction);
+
+
+buildContext()
+
+chrome.runtime.onMessage.addListener(receiveMessage);

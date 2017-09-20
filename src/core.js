@@ -1,6 +1,4 @@
-const defaultSettings = {
-   key: 'AIzaSyA61YQflGBiR2a-9q_C83kvb8c5kTifxRk'
-}
+const defaultKey = 'AIzaSyA61YQflGBiR2a-9q_C83kvb8c5kTifxRk'
 
 /**
  * Checks if protocol is supported (only http and https)
@@ -78,12 +76,9 @@ function shortenLink(link) {
 
   if (isSupportedProtocol(link)) {
     // Send link to API
-    var key = browser.storage.sync.get('key');
+    browser.storage.local.get('prefs').then(ret => {
+      let item = ret['prefs'] || {key: defaultKey}
 
-    key.then(function(item) {
-      if (item.key === undefined) {
-        item.key = defaultSettings.key
-      }
       var basename = "https://www.googleapis.com";
       var urlfrag = "/urlshortener/v1/url?key=" + item.key;
       var longUrl = encodeURIComponent(link);

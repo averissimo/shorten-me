@@ -4,6 +4,11 @@
     "description": "Title of context menu item to shorten links."
   },
 
+  "shortenTab": {
+    "message": "Shorten this tab's URL",
+    "description": "Title of context menu item to shorten links."
+  },
+
   "notificationTitle": {
     "message": "Shorten me",
     "description": "Title of context menu item to shorten links."
@@ -43,6 +48,36 @@
         "example" : "https://developer.mozilla.org"
       }
     }
+  },
+
+  "tab_url_in_context_title": {
+    "message": "\"Shorten this tab's URL\"",
+    "description": "when right-clicking anywhere in the page"
+  },
+
+  "tab_url_in_context_description": {
+    "message": "- when right-clicking anywhere in the page",
+    "description": "."
+  },
+
+  "link_in_context_title": {
+    "message": "\"Shorten this link\"",
+    "description": "."
+  },
+
+  "link_in_context_description": {
+    "message": "- when right-clicking a link",
+    "description": "."
+  },
+
+  "google_api_title": {
+    "message": "Google URL Shortener API key",
+    "description": "."
+  },
+
+  "google_api_description": {
+    "message": "Leave empty to use default API. To get a key visit:",
+    "description": "."
   },
 
   "notificationErrorHost": {

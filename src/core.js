@@ -47,6 +47,11 @@ function shortenLink(link) {
           runAt: 'document_start',
           matchAboutBlank: true
         });
+        // console.log('response', response)
+        if (response.error !== undefined) {
+          notify("notificationErrorKey", [response.error.errors[0].reason])
+          return null
+        }
         notifySuccess({url: link, shortUrl: response.id});
         return retVal
       }, function(error){
@@ -77,7 +82,12 @@ function shortenLink(link) {
   if (isSupportedProtocol(link)) {
     // Send link to API
     browser.storage.local.get('prefs').then(ret => {
-      let item = ret['prefs'] || {key: defaultKey}
+
+      let item = ret['prefs'] || { key: defaultKey }
+
+      if (item === undefined || item.key === undefined || item.key.trim() === '' ) {
+        item.key = defaultKey
+      }
 
       var basename = "https://www.googleapis.com";
       var urlfrag = "/urlshortener/v1/url?key=" + item.key;

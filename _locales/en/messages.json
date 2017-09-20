@@ -34,6 +34,17 @@
     "description": "Generic error message."
   },
 
+  "notificationErrorKey": {
+    "message": "There is a problem with the API key (reason: $REASON$), check the addon's options and use a valid key.",
+    "description": "Network error calling goo.gl service.",
+    "placeholders": {
+      "reason" : {
+        "content" : "$1",
+        "example" : "some string"
+      }
+    }
+  },
+
   "notificationErrorNetwork": {
     "message": "Network problems when calling goo.gl service, please check your connection.",
     "description": "Network error calling goo.gl service."

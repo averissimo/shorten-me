@@ -22,63 +22,10 @@ function shortenLink(link) {
 
     // console.log('response', response)
 
-    const code = "copyToClipboard(" +
-                JSON.stringify(response.link) + ");";
-
-    // console.log('Code being run in current tab', code);
-
-    function copyInTab(tabId, noRecur=false) {
-      browser.tabs.executeScript({
-        code: "typeof copyToClipboard === 'function';",
-        runAt: 'document_start',
-        matchAboutBlank: true
-      }).then(function(results) {
-        // The content script's last expression will be true if the function
-        // has been defined. If this is not the case, then we need to run
-        // clipboard-helper.js to define function copyToClipboard.
-        if (!results || results[0] !== true) {
-          return browser.tabs.executeScript(tabId, {
-            file: "/src/clipboard_helper.js",
-            runAt: 'document_start',
-            matchAboutBlank: true
-          });
-        }
-      }).then(function(results2) {
-        var retVal = browser.tabs.executeScript(tabId, {
-          code: code,
-          runAt: 'document_start',
-          matchAboutBlank: true
-        });
-        // console.log('response', response)
-        if (response.message === null) {
-          notify("notificationErrorKey", [response.message])
-          return null
-        }
-        notifySuccess({url: link, shortUrl: response.link});
-        return retVal
-      }, function(error){
-        if(noRecur) {
-          // console.log('Going to try tab.id 1')
-          copyInTab(1, false);
-        } else {
-          if (error.message && /Missing host permission for the tab/.test(error.message)) {
-            notifyHostError({info: error, url: link, shortUrl: response.message});
-          } else {
-            notifyClipboardError({info: error, url: link, shortUrl: response.link});
-          }
-        }
-      }).then(function() {
-        // console.log('success!!')
-      });
-    }
-    var gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
-    gettingActiveTab.then(function(tabs) {
-      if(tabs[0]) {
-        copyInTab(tabs[0].id, true)
-      } else {
-        // console.error("Failed to copy text: no active tab");
-      }
-    })
+    navigator.clipboard.writeText(response.link).then(
+      () => notifySuccess({url: link, shortUrl: response.link}),
+      error => notifyClipboardError({info: error, url: link, shortUrl: response.link})
+    )
   }
 
   if (isSupportedProtocol(link)) {

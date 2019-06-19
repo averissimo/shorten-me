@@ -3,7 +3,7 @@
  */
 function onCreated(n) {
   if (browser.runtime.lastError) {
-    console.log(`Error: ${browser.runtime.lastError}`);
+    console.log(`Error: ${browser.runtime.lastError}`)
   } else {
     // console.log("Item created successfully");
   }
@@ -28,7 +28,7 @@ function buildContext() {
         //title: browser.i18n.getMessage("shortenURL"),
         title: browser.i18n.getMessage("shortenURL"),
         contexts: ["link"]
-      }, onCreated);
+      }, onCreated)
     }
 
     if (item.tab_url_in_context) {
@@ -40,7 +40,7 @@ function buildContext() {
         //title: browser.i18n.getMessage("shortenURL"),
         title: browser.i18n.getMessage("shortenTab"),
         contexts: ["audio", "editable", "frame", "image", "page", "password", "selection", "video"]
-      }, onCreated);
+      }, onCreated)
     }
   })
 }
@@ -71,7 +71,7 @@ function shortenFromBrowserAction() {
   }
 
   // run this
-  var gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
+  const gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
   gettingActiveTab.then(updateTab)
 }
 
@@ -88,8 +88,9 @@ function enableBrowserAction(tabId, tabUrl) {
 }
 
 function checkActivatedTab(activeInfo) {
-  var gettingInfo = browser.tabs.get(activeInfo.tabId)
-  gettingInfo.then(function(tabInfo){
+  const gettingInfo = browser.tabs.get(activeInfo.tabId)
+  gettingInfo.then((tabInfo) => {
+    // console.log('tabInfo', tabInfo)
     enableBrowserAction(tabInfo.id, tabInfo.url);
   });
 }
@@ -121,19 +122,24 @@ function receiveMessage(message,sender,sendResponse){
 browser.tabs.onUpdated.addListener(checkTabIsSupported)
 browser.tabs.onActivated.addListener(checkActivatedTab)
 
-var currentTab = browser.tabs.query({active: true});
+// Initialize browser icon on load
+let currentTab
+if (currentTab === undefined) {
+  currentTab = browser.tabs.query({active: true, currentWindow: true})
 
-currentTab.then(function(tabInfoArray){
-  tabInfoArray.forEach(function(tabInfo){
-    enableBrowserAction(tabInfo.id, tabInfo.url);
+  currentTab.then(tabInfoArray => {
+    tabInfoArray.forEach(tabInfo => {
+      // console.log('tabInfo', tabInfo)
+      enableBrowserAction(tabInfo.id, tabInfo.url)
+    })
   })
-});
+}
 
 
 /**
  * Adds listener to check when button is pressed
  */
-browser.browserAction.onClicked.addListener(shortenFromBrowserAction);
+browser.browserAction.onClicked.addListener(shortenFromBrowserAction)
 
 buildContext()
 

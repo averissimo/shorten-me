@@ -22,6 +22,13 @@ function shortenLink(link) {
 
     // console.log('response', response)
 
+    if (response.message) {
+      switch (response.message) {
+        case "FORBIDDEN": notifyNetworkErrorKey(response.message) ; break;
+        default: notifyErrorGeneric(); break;
+      }
+      return null
+    }
     navigator.clipboard.writeText(response.link).then(
       () => notifySuccess({url: link, shortUrl: response.link}),
       error => notifyClipboardError({info: error, url: link, shortUrl: response.link})
@@ -61,31 +68,62 @@ function shortenLink(link) {
   }
 }
 
-/**
- * Notify error message
- * @param  {[type]} messageType [description]
- * @param  {[type]} messageArray [description]
- * @return {[type]}         [description]
+/*
+ *
+ *
+ *
+ *
+ * Notifications (success, error, ...)
+ *  auxiliary functions
+ *
+ *
+ *
  */
-function notify(messageType = "notificationErrorGeneric", messageArray = []) {
-  var title = browser.i18n.getMessage("notificationTitle");
-  var content = browser.i18n.getMessage(messageType, messageArray);
-  // console.log('Error: ' + content)
-  browser.notifications.create({
-    "type": "basic",
-    "iconUrl": browser.extension.getURL("icons/icon-48.png"),
-    "title": title,
-    "message": content
-  });
-}
+
+ /**
+  * Notify error message
+  * @param  {[type]} messageType [description]
+  * @param  {[type]} messageArray [description]
+  * @return {[type]}         [description]
+  */
+ function notify(messageType = "notificationErrorGeneric", messageArray = []) {
+   var title = browser.i18n.getMessage("notificationTitle");
+   var content = browser.i18n.getMessage(messageType, messageArray);
+   // console.log('Error: ' + content)
+   browser.notifications.create({
+     "type": "basic",
+     "iconUrl": browser.extension.getURL("icons/icon-48.png"),
+     "title": title,
+     "message": content
+   });
+ }
+
+ /**
+  * [notifySuccess description]
+  * @param  {[type]} message [description]
+  * @return {[type]}         [description]
+  */
+ function notifySuccess(message) {
+   notify("notificationContent", [message.url, message.shortUrl]);
+ }
 
 /**
- * [notifySuccess description]
+ * [notificationErrorKey description]
  * @param  {[type]} message [description]
  * @return {[type]}         [description]
  */
-function notifySuccess(message) {
-  notify("notificationContent", [message.url, message.shortUrl]);
+function notifyErrorGeneric(message) {
+  notify("notificationErrorGeneric");
+}
+
+
+/**
+ * [notificationErrorKey description]
+ * @param  {[type]} message [description]
+ * @return {[type]}         [description]
+ */
+function notifyNetworkErrorKey(message) {
+  notify("notificationErrorKey", message);
 }
 
 /**

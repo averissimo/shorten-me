@@ -36,7 +36,7 @@
 
   "notificationErrorKey": {
     "message": "There is a problem with the API key (reason: $REASON$), check the addon's options and use a valid key.",
-    "description": "Network error calling goo.gl service.",
+    "description": "Network error calling bit.ly service.",
     "placeholders": {
       "reason" : {
         "content" : "$1",
@@ -46,8 +46,8 @@
   },
 
   "notificationErrorNetwork": {
-    "message": "Network problems when calling goo.gl service, please check your connection.",
-    "description": "Network error calling goo.gl service."
+    "message": "Network problems when calling bit.ly service, please check your connection.",
+    "description": "Network error calling bit.ly service."
   },
 
   "notificationErrorProtocol": {
@@ -82,7 +82,7 @@
   },
 
   "google_api_title": {
-    "message": "Google URL Shortener API key",
+    "message": "Bit.ly URL Shortener API key",
     "description": "."
   },
 

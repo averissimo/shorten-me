@@ -1,4 +1,4 @@
-const defaultKey = 'AIzaSyA61YQflGBiR2a-9q_C83kvb8c5kTifxRk'
+const defaultKey = '41a1f837109164081dd190f61e27fc650e6ba0ed'
 
 /**
  * Checks if protocol is supported (only http and https)
@@ -21,7 +21,7 @@ function shortenLink(link) {
     var response = JSON.parse(evt.target.response);
 
     const code = "copyToClipboard(" +
-                JSON.stringify(response.id) + ");";
+                JSON.stringify(response.data.url) + ");";
 
     // console.log('Code being run in current tab', code);
 
@@ -48,11 +48,11 @@ function shortenLink(link) {
           matchAboutBlank: true
         });
         // console.log('response', response)
-        if (response.error !== undefined) {
-          notify("notificationErrorKey", [response.error.errors[0].reason])
+        if (response.status_code !== 200) {
+          notify("notificationErrorKey", [response.status_txt])
           return null
         }
-        notifySuccess({url: link, shortUrl: response.id});
+        notifySuccess({url: link, shortUrl: response.data.url});
         return retVal
       }, function(error){
         if(noRecur) {
@@ -60,9 +60,9 @@ function shortenLink(link) {
           copyInTab(1, false);
         } else {
           if (error.message && /Missing host permission for the tab/.test(error.message)) {
-            notifyHostError({info: error, url: link, shortUrl: response.id});
+            notifyHostError({info: error, url: link, shortUrl: response.status_txt});
           } else {
-            notifyClipboardError({info: error, url: link, shortUrl: response.id});
+            notifyClipboardError({info: error, url: link, shortUrl: response.data.url});
           }
         }
       }).then(function() {
@@ -84,14 +84,15 @@ function shortenLink(link) {
     browser.storage.local.get('prefs').then(ret => {
 
       let item = ret['prefs'] || { key: defaultKey }
-
+      console.log('key', item)
       if (item === undefined || item.key === undefined || item.key.trim() === '' ) {
+        console.log('setting default key')
         item.key = defaultKey
       }
 
-      var basename = "https://www.googleapis.com";
-      var urlfrag = "/urlshortener/v1/url?key=" + item.key;
+      var basename = "https://api-ssl.bitly.com";
       var longUrl = encodeURIComponent(link);
+      var urlfrag = "/v3/shorten?access_token=" + item.key + "&longUrl=" + longUrl + "&format=json/urlshortener/v1/url?key=" + item.key;
       //
       // console.log('Calling ' + basename + urlfrag + ' with ' + JSON.stringify({"longUrl": link}));
       // POST request

@@ -135,7 +135,6 @@ currentTab.then(function(tabInfoArray){
  */
 browser.browserAction.onClicked.addListener(shortenFromBrowserAction);
 
-
 buildContext()
 
 chrome.runtime.onMessage.addListener(receiveMessage);

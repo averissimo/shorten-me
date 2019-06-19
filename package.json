@@ -2,7 +2,8 @@
   "name": "shorten-me",
   "scripts": {
     "test": "xo",
-    "build": "gulp package"
+    "build": "gulp package",
+    "package": "gulp package"
   },
   "author": {
     "name": "André Veríssimo"

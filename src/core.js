@@ -20,8 +20,10 @@ function shortenLink(link) {
   function executeCopyScript(evt) {
     var response = JSON.parse(evt.target.response);
 
+    // console.log('response', response)
+
     const code = "copyToClipboard(" +
-                JSON.stringify(response.data.url) + ");";
+                JSON.stringify(response.link) + ");";
 
     // console.log('Code being run in current tab', code);
 
@@ -48,11 +50,11 @@ function shortenLink(link) {
           matchAboutBlank: true
         });
         // console.log('response', response)
-        if (response.status_code !== 200) {
-          notify("notificationErrorKey", [response.status_txt])
+        if (response.message === null) {
+          notify("notificationErrorKey", [response.message])
           return null
         }
-        notifySuccess({url: link, shortUrl: response.data.url});
+        notifySuccess({url: link, shortUrl: response.link});
         return retVal
       }, function(error){
         if(noRecur) {
@@ -60,9 +62,9 @@ function shortenLink(link) {
           copyInTab(1, false);
         } else {
           if (error.message && /Missing host permission for the tab/.test(error.message)) {
-            notifyHostError({info: error, url: link, shortUrl: response.status_txt});
+            notifyHostError({info: error, url: link, shortUrl: response.message});
           } else {
-            notifyClipboardError({info: error, url: link, shortUrl: response.data.url});
+            notifyClipboardError({info: error, url: link, shortUrl: response.link});
           }
         }
       }).then(function() {
@@ -84,15 +86,15 @@ function shortenLink(link) {
     browser.storage.local.get('prefs').then(ret => {
 
       let item = ret['prefs'] || { key: defaultKey }
-      console.log('key', item)
-      if (item === undefined || item.key === undefined || item.key.trim() === '' ) {
-        console.log('setting default key')
-        item.key = defaultKey
+      // console.log('key', item)
+      if (item === undefined || item.bitlykey === undefined || item.bitlykey.trim() === '' ) {
+        // console.log('setting default key')
+        item.bitlykey = defaultKey
       }
 
       var basename = "https://api-ssl.bitly.com";
       var longUrl = encodeURIComponent(link);
-      var urlfrag = "/v3/shorten?access_token=" + item.key + "&longUrl=" + longUrl + "&format=json/urlshortener/v1/url?key=" + item.key;
+      var urlfrag = "/v4/bitlinks";
       //
       // console.log('Calling ' + basename + urlfrag + ' with ' + JSON.stringify({"longUrl": link}));
       // POST request
@@ -102,7 +104,8 @@ function shortenLink(link) {
       xhr.open("POST", basename + urlfrag, true);
       // Send the proper header information along with the request
       xhr.setRequestHeader("Content-type", "application/json");
-      xhr.send(JSON.stringify({"longUrl": link}));
+      xhr.setRequestHeader("Authorization", "Bearer " + item.bitlykey);
+      xhr.send(JSON.stringify({"long_url": link}));
       // console.log('request', xhr);
     });
   } else {

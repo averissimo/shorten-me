@@ -6,7 +6,8 @@
     "package": "gulp package"
   },
   "author": {
-    "name": "André Veríssimo"
+    "name": "André Veríssimo",
+    "email": "shorten.me.mozilla@gmail.com "
   },
   "repository": "https://github.com/averissimo/shorten-me",
   "bugs": "https://github.com/averissimo/shorten-me/issues",

@@ -1,5 +1,5 @@
 const options = {
-  key: {
+  bitlykey: {
     attr: 'value',
     def: ''
   },

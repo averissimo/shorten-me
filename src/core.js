@@ -55,8 +55,6 @@ function shortenLink(link) {
         item.bitlykey = chooseDefaultKey
       }
 
-      console.log('Key to be used', chooseDefaultKey)
-
       var basename = "https://api-ssl.bitly.com";
       var longUrl = encodeURIComponent(link);
       var urlfrag = "/v4/bitlinks";

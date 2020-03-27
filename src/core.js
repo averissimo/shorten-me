@@ -1,4 +1,5 @@
-const defaultKey = '41a1f837109164081dd190f61e27fc650e6ba0ed'
+const defaultKey = [ '41a1f837109164081dd190f61e27fc650e6ba0ed',
+ '30ff74ef00795ea27b70d4d9dcb28256126e56ec']
 
 /**
  * Checks if protocol is supported (only http and https)
@@ -38,13 +39,23 @@ function shortenLink(link) {
   if (isSupportedProtocol(link)) {
     // Send link to API
     browser.storage.local.get('prefs').then(ret => {
+      let chooseDefaultKey;
 
-      let item = ret['prefs'] || { key: defaultKey }
+      // must remove in the future.
+      if ((new Date()).getFullYear() == 2020 && (new Date()).getMonth() <=2) {
+        chooseDefaultKey = defaultKey[1];
+      } else {
+        chooseDefaultKey = defaultKey[Math.floor(Math.random() * defaultKey.length)];
+      }
+
+      let item = ret['prefs'] || { key: chooseDefaultKey }
       // console.log('key', item)
       if (item === undefined || item.bitlykey === undefined || item.bitlykey.trim() === '' ) {
         // console.log('setting default key')
-        item.bitlykey = defaultKey
+        item.bitlykey = chooseDefaultKey
       }
+
+      console.log('Key to be used', chooseDefaultKey)
 
       var basename = "https://api-ssl.bitly.com";
       var longUrl = encodeURIComponent(link);

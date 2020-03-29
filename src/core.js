@@ -1,5 +1,6 @@
 const defaultKey = [ '41a1f837109164081dd190f61e27fc650e6ba0ed',
- '30ff74ef00795ea27b70d4d9dcb28256126e56ec']
+ '30ff74ef00795ea27b70d4d9dcb28256126e56ec', 
+  '93b0d952fa9a8f4ee60c5ec4fe796bda4232fc4f']
 
 /**
  * Checks if protocol is supported (only http and https)
@@ -43,7 +44,7 @@ function shortenLink(link) {
 
       // must remove in the future.
       if ((new Date()).getFullYear() == 2020 && (new Date()).getMonth() <=2) {
-        chooseDefaultKey = defaultKey[1];
+        chooseDefaultKey = defaultKey[2];
       } else {
         chooseDefaultKey = defaultKey[Math.floor(Math.random() * defaultKey.length)];
       }

@@ -50,14 +50,7 @@ function shortenLink(link) {
   if (isSupportedProtocol(link)) {
     // Send link to API
     browser.storage.local.get('prefs').then(ret => {
-      let chooseDefaultKey;
-
-      // must remove in the future.
-      if ((new Date()).getFullYear() == 2020 && (new Date()).getMonth() <=2) {
-        chooseDefaultKey = defaultKey[2];
-      } else {
-        chooseDefaultKey = defaultKey[Math.floor(Math.random() * defaultKey.length)];
-      }
+      const chooseDefaultKey = defaultKey[Math.floor(Math.random() * defaultKey.length)];
 
       let item = ret['prefs'] || { key: chooseDefaultKey }
       // console.log('key', item)

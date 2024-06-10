@@ -1,8 +1,4 @@
 const options = {
-  bitlykey: {
-    attr: 'value',
-    def: ''
-  },
   tab_url_in_context: {
     attr: 'checked',
     def: false

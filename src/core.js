@@ -1,22 +1,5 @@
-const defaultKey = [ 
-  '41a1f837109164081dd190f61e27fc650e6ba0ed',
-  '41a1f837109164081dd190f61e27fc650e6ba0ed',
-  '41a1f837109164081dd190f61e27fc650e6ba0ed',
-  '41a1f837109164081dd190f61e27fc650e6ba0ed',
-  '41a1f837109164081dd190f61e27fc650e6ba0ed',
-  '41a1f837109164081dd190f61e27fc650e6ba0ed',
-  '41a1f837109164081dd190f61e27fc650e6ba0ed',
-  '41a1f837109164081dd190f61e27fc650e6ba0ed',
-  '41a1f837109164081dd190f61e27fc650e6ba0ed',
-  '41a1f837109164081dd190f61e27fc650e6ba0ed',
-  //
-  '30ff74ef00795ea27b70d4d9dcb28256126e56ec', 
-  '93b0d952fa9a8f4ee60c5ec4fe796bda4232fc4f',
-  '8564614c6ae17006f477a8c76212c99f2f0acbc6',
-  'a010b101b7e19eb731e440fa59742db3a559c0b6',
-  '1acaa73f852795eba0b35a9d2b6928f7b3673c8d',
-  'c8c0a84d2632dc08673e48b57b4651025b37e4d5',
-  '2dd8dda6357b73aeac8bfdb14a5eb38b815b4484']
+const defaultKey = [
+  '1cf19ef0-42ce-4e75-8ed8-afedfa129b04']
 
 /**
  * Checks if protocol is supported (only http and https)
@@ -47,9 +30,9 @@ function shortenLink(link) {
       }
       return null
     }
-    navigator.clipboard.writeText(response.link).then(
-      () => notifySuccess({url: link, shortUrl: response.link}),
-      error => notifyClipboardError({info: error, url: link, shortUrl: response.link})
+    navigator.clipboard.writeText(response.shortUrl).then(
+      () => notifySuccess({url: link, shortUrl: response.shortUrl}),
+      error => notifyClipboardError({info: error, url: link, shortUrl: response.shortUrl})
     )
   }
 
@@ -58,16 +41,9 @@ function shortenLink(link) {
     browser.storage.local.get('prefs').then(ret => {
       const chooseDefaultKey = defaultKey[Math.floor(Math.random() * defaultKey.length)];
 
-      let item = ret['prefs'] || { key: chooseDefaultKey }
-      // console.log('key', item)
-      if (item === undefined || item.bitlykey === undefined || item.bitlykey.trim() === '' ) {
-        // console.log('setting default key')
-        item.bitlykey = chooseDefaultKey
-      }
-
-      var basename = "https://api-ssl.bitly.com";
+      var basename = "http://shorten.escalar.pt/";
       var longUrl = encodeURIComponent(link);
-      var urlfrag = "/v4/shorten" // "/v4/bitlinks";
+      var urlfrag = "/rest/v3/short-urls" // "/v4/bitlinks";
       //
       // console.log('Calling ' + basename + urlfrag + ' with ' + JSON.stringify({"longUrl": link}));
       // POST request
@@ -76,9 +52,9 @@ function shortenLink(link) {
       xhr.addEventListener("error", notifyNetworkError);
       xhr.open("POST", basename + urlfrag, true);
       // Send the proper header information along with the request
-      xhr.setRequestHeader("Content-type", "application/json");
-      xhr.setRequestHeader("Authorization", "Bearer " + item.bitlykey);
-      xhr.send(JSON.stringify({"long_url": link}));
+      xhr.setRequestHeader("Accept", "application/json");
+      xhr.setRequestHeader("X-Api-Key", chooseDefaultKey);
+      xhr.send(JSON.stringify({"longUrl": link}));
       console.log('request', xhr);
     });
   } else {

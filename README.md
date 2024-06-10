@@ -1,15 +1,16 @@
 # Shorten me
 
+> Create short urls in Firefox
+
 Available at [Firefox addons](https://addons.mozilla.org/en-US/firefox/addon/shorten_me/)
 
-The extension I was previously using ([shortly](https://github.com/aloshbennett/shortly)) is
-not webExtensions friendly so I created this very simple one that pretty much
-does the same thing
+This extension was created after webExtension transition in Firefox rendered several addons unusable. ([shortly](https://github.com/aloshbennett/shortly)) was one of them so I created this very simple one that pretty much does the same thing.
 
-## bit.ly API
+## shorten.escalar.pt
 
-Calls bit.ly API with own key that can be customizable in the preferences. Key
-that is distributed with extension has a limit on 1.000 per hour and 100 per minute.
+The short url generator service used is being self-hosted. bit.ly was previously used, but the changes in free plan has changed and it is no longer viable to use it.
+
+The service is setup with visit tracking disabled, so that there are no analytics on the short-urls being generated.
 
 ## Icon
 

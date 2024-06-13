@@ -41,9 +41,9 @@ function shortenLink(link) {
     browser.storage.local.get('prefs').then(ret => {
       const chooseDefaultKey = defaultKey[Math.floor(Math.random() * defaultKey.length)];
 
-      var basename = "http://shorten.escalar.pt/";
+      var basename = "http://shrtn.escalar.pt/";
       var longUrl = encodeURIComponent(link);
-      var urlfrag = "/rest/v3/short-urls" // "/v4/bitlinks";
+      var urlfrag = "/rest/v3/short-urls"
       //
       // console.log('Calling ' + basename + urlfrag + ' with ' + JSON.stringify({"longUrl": link}));
       // POST request
@@ -54,7 +54,7 @@ function shortenLink(link) {
       // Send the proper header information along with the request
       xhr.setRequestHeader("Accept", "application/json");
       xhr.setRequestHeader("X-Api-Key", chooseDefaultKey);
-      xhr.send(JSON.stringify({"longUrl": link}));
+      xhr.send(JSON.stringify({"longUrl": link, "findIfExists": true}));
       console.log('request', xhr);
     });
   } else {

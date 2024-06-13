@@ -6,7 +6,7 @@ Available at [Firefox addons](https://addons.mozilla.org/en-US/firefox/addon/sho
 
 This extension was created after webExtension transition in Firefox rendered several addons unusable. ([shortly](https://github.com/aloshbennett/shortly)) was one of them so I created this very simple one that pretty much does the same thing.
 
-## shorten.escalar.pt
+## shrtn.escalar.pt
 
 The short url generator service used is being self-hosted. bit.ly was previously used, but the changes in free plan has changed and it is no longer viable to use it.
 

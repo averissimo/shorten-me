@@ -2,7 +2,7 @@
 
   "manifest_version": 2,
   "name": "Shorten me - URL Shortener",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "author": "André Veríssimo",
   "default_locale": "en",
 
